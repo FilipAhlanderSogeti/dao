@@ -26,11 +26,11 @@ contract YourContract {
                         msg.sender
                     )
                 )
-            ) % 10;
+            ) % 9;
     }
 
     function setPurpose(uint256 newPurpose) public payable {
-        uint256 lastWinningNumber = random();
+        uint256 lastWinningNumber = 1 + random();
         console.log("Slumpat nummer: ", lastWinningNumber);
         payable(pengapung).transfer((msg.value * 1) / 10);
         if (newPurpose == lastWinningNumber) {
