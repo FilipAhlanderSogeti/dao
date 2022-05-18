@@ -16,9 +16,24 @@ contract YourContract {
         // what should we do on deploy?
     }
 
+    function random() public view returns (uint256) {
+        return
+            uint256(
+                keccak256(
+                    abi.encodePacked(
+                        block.timestamp,
+                        block.difficulty,
+                        msg.sender
+                    )
+                )
+            ) % 10;
+    }
+
     function setPurpose(uint256 newPurpose) public payable {
+        uint256 lastWinningNumber = random();
+        console.log("Slumpat nummer: ", lastWinningNumber);
         payable(pengapung).transfer((msg.value * 1) / 10);
-        if (newPurpose == 10) {
+        if (newPurpose == lastWinningNumber) {
             console.log("We have a wiener");
             payable(msg.sender).transfer(address(this).balance);
         }
